@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+
+  users-service:
+    container_name: user-services-dev
+    restart: on-failure
+    volumes:
+      - ./apps/users/:/opt/project/apps/users/
+    build:
+      dockerfile: ./dockerfile
+      context: ./
+      args:
+        APP_NAME: users
+    ports:
+      - 3000:3000
+
+  auth-service:
+    container_name: auth-services-dev
+    restart: on-failure
+    volumes:
+      - ./apps/users/:/opt/project/apps/users/
+    build:
+      dockerfile: ./dockerfile
+      context: ./
+      args:
+        APP_NAME: auth
+    ports:
+      - 3500:3000
